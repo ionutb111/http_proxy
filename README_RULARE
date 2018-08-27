@@ -1,0 +1,8 @@
+Daca doriti sa compilati codul sursa scrieti make in terminal.
+Dupa make obtineti executabilul httpproxy pe care il puteti folosi ulterior.
+
+Pentru rulare cu checker puteti sa scrieti in terminal:
+./checker.py httpproxy PORT
+
+Pentru rulare fara checker
+./httpproxy PORT

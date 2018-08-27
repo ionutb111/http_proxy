@@ -1,0 +1,42 @@
+NUME: BRINZAN IONUT
+GRUPA: 324CD
+
+README
+
+Limbaj de programare folosit: C++
+
+Pentru realizarea acestei teme am realizat un server proxy.
+Inainte de a explica cum functioneaza acest server trebuie sa precizez ca am preluat din laborator:
+-functia Readline din laboratorul de http
+-scheletul din laboratorul de multiplexare
+-o parte din laboratorul din de DNS
+
+Functionarea acestui program se poate descrie astfel:
+
+-Verific daca numarul de argumente este corect dupa care setez portul primit ca parametru pentru comunicarea prin TCP cu clientii.
+
+-Ascult pe acel port si fac multiplexare.
+
+-Creez cache-ul care este reprezentat sub forma unui vector de structuri de tip cacheEntry unde un cacheEntry are 3 campuri:
+	-request care reprezinta cererea ce va fi cautata
+	-page care reprezinta pagina care trebuie intoarsa
+	-len care este lungimea mesajului care va fi trimis catre client
+
+-In momentul in care se conecteaza un client si trimite o cerere, eu o preiau si verific daca se afla in cache,in cazul in care se afla pur si simplu preiau pagina corespunzatoare din cache si o trimit inapoi.
+
+-In cazul in care nu exista in cache verific ce tip de request este,am impartit requesturile in 2 tipuri:
+	-cele care contin Host: pe linia 2
+	-cele care nu contin Host: pe linia 2
+
+-Pentru fiecare dintre cazuri verific corectitudinea cererii,scot portul daca acesta exista in cerere in caz contrar il setez implicit la 80,fac parsarile necesare pentru DNS si aflu adresa IP corespunzatoare pentru acel host prin DNS.
+
+-Dupa ce am aflat portul si adresa IP acum pot face o conexiune TCP cu serverul real caruia ii trimit cererea primita de la client dupa care primesc raspunsul de la acesta il salvez in cache corespunzator si il trimit la client.
+
+-In final inchid socketii si astept urmatoarea cerere.
+
+Observatii:
+1.Pagina 3 de la GET din checker este identica cu cea generata in mod normal dar imi da numar diferit de linii.
+2.Programul functioneaza cu un while(1) asa ca socketTCP nu va fi inchis.
+
+BRINZAN IONUT
+324 CD
